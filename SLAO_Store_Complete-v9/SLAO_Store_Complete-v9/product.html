@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Product - SLAO</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        slao: { maroon: '#6b182b', maroonDark: '#4a0f1d', gold: '#d4af37', cream: '#fcf8f3', charcoal: '#1c1c1c' }
+                    },
+                    fontFamily: { serif: ['Cinzel', 'serif'], sans: ['Plus Jakarta Sans', 'sans-serif'] }
+                }
+            }
+        }
+    </script>
+    <style>
+        
+        ::selection {
+            background-color: #6b182b;
+            color: #f3e8c9;
+        }
+        ::-moz-selection {
+            background-color: #6b182b;
+            color: #f3e8c9;
+        }
+        .copyable-text {
+            cursor: text;
+        }
+        
+
+    </style>
+</head>
+<body class="bg-slao-cream text-gray-900 min-h-screen flex flex-col">
+    
+    <!-- Top Announcement Bar -->
+    <div class="bg-slao-maroon text-white text-xs md:text-sm tracking-wider py-2 px-6 flex justify-between items-center">
+        <span class="hidden md:inline-block copyable-text"><i class="fa-solid fa-sparkles mr-2"></i> Nationwide Delivery Across Pakistan</span>
+        <span class="w-full md:w-auto text-center font-semibold copyable-text">MID-SUMMER SALE IS LIVE! UP TO 40% OFF</span>
+        <span class="hidden md:inline-block"><i class="fa-solid fa-phone mr-1"></i><a href="tel:+923329975035" class="hover:text-slao-gold transition">+92 3329975035</a></span>
+    </div>
+
+    <!-- Header -->
+    <header class="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-gray-200 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-20">
+            <div class="flex items-center lg:hidden">
+                <button id="mobile-menu-btn" onclick="document.getElementById('mobile-menu').classList.toggle('hidden')" class="p-2 text-slao-charcoal hover:text-slao-maroon"><i class="fa-solid fa-bars text-2xl"></i></button>
+            </div>
+
+            <a href="index.html" class="flex-shrink-0 flex items-center">
+                <div>
+                    <span class="font-serif text-3xl sm:text-4xl font-extrabold tracking-widest text-slao-maroon">SLAO</span>
+                    <span class="block text-[10px] tracking-[0.3em] font-semibold text-slao-gold uppercase -mt-1">Wear Your Style</span>
+                </div>
+            </a>
+
+            <nav class="hidden lg:flex space-x-8 text-sm font-semibold tracking-wide uppercase">
+                <a href="index.html" class="text-gray-700 hover:text-slao-maroon py-1">New Arrivals</a>
+                <a href="collections/unstitched/index.html" class="text-gray-700 hover:text-slao-maroon py-1">Unstitched</a>
+                <a href="collections/ready-to-wear/index.html" class="text-gray-700 hover:text-slao-maroon py-1">Ready To Wear</a>
+                <a href="collections/western/index.html" class="text-gray-700 hover:text-slao-maroon py-1">Western</a>
+                <a href="collections/sale/index.html" class="text-rose-600 font-bold hover:text-rose-700 py-1"><i class="fa-solid fa-fire text-xs mr-1"></i> Sale %</a>
+            </nav>
+
+            <div class="flex items-center space-x-4">
+                <a href="index.html#products-section" class="text-gray-700 hover:text-slao-maroon p-2" title="Search"><i class="fa-solid fa-magnifying-glass text-xl"></i></a>
+                <a href="checkout.html" onclick="localStorage.setItem('slao_checkout_mode','CART')" class="text-gray-700 hover:text-slao-maroon p-2 relative" title="Shopping Cart">
+                    <i class="fa-solid fa-bag-shopping text-2xl"></i>
+                    <span id="cart-count" class="absolute top-0 right-0 bg-slao-maroon text-white text-[11px] font-bold w-5 h-5 rounded-full flex items-center justify-center border-2 border-white">0</span>
+                </a>
+            </div>
+        </div>
+
+        <div id="mobile-menu" class="hidden lg:hidden bg-white border-b border-gray-200 px-4 pt-2 pb-6 space-y-2">
+            <a href="index.html" class="block py-2 px-3 text-base font-semibold text-slao-maroon bg-slao-cream rounded-md">New Arrivals</a>
+            <a href="collections/unstitched/index.html" class="block py-2 px-3 text-base font-medium text-gray-700 hover:bg-gray-50 rounded-md">Unstitched Lawn</a>
+            <a href="collections/ready-to-wear/index.html" class="block py-2 px-3 text-base font-medium text-gray-700 hover:bg-gray-50 rounded-md">Ready To Wear</a>
+            <a href="collections/western/index.html" class="block py-2 px-3 text-base font-medium text-gray-700 hover:bg-gray-50 rounded-md">Western Collection</a>
+            <a href="collections/sale/index.html" class="block py-2 px-3 text-base font-semibold text-rose-600 hover:bg-rose-50 rounded-md">Sale</a>
+        </div>
+    </header>
+
+
+    <div class="max-w-5xl mx-auto w-full p-4 sm:p-8 flex-grow space-y-8">
+        <div>
+            <a href="index.html" class="inline-flex items-center text-sm font-semibold text-slao-maroon hover:underline">
+                <i class="fa-solid fa-arrow-left mr-2"></i> Back to Store
+            </a>
+        </div>
+
+        <div class="bg-white rounded-3xl shadow-xl overflow-hidden grid grid-cols-1 md:grid-cols-2">
+            <div class="bg-gray-100 min-h-[340px]">
+                <img id="prod-img" src="" alt="Product" class="w-full h-full object-cover transition-all duration-300">
+            </div>
+
+            <div class="p-6 sm:p-8 flex flex-col justify-between space-y-6">
+                <div>
+                    <span id="prod-cat" class="text-xs font-bold uppercase tracking-widest text-slao-gold copyable-text"></span>
+                    <h1 id="prod-title" class="text-2xl sm:text-3xl font-bold mt-1 copyable-text"></h1>
+
+                    <div class="mt-2 flex items-baseline gap-2">
+                        <p id="prod-price" class="text-2xl font-extrabold text-slao-maroon copyable-text"></p>
+                    </div>
+
+                    <p id="prod-desc" class="text-sm text-gray-500 mt-3 copyable-text"></p>
+
+                    <!-- Size Selection -->
+                    <div class="mt-5">
+                        <label class="block text-xs font-bold uppercase text-gray-700 mb-2">
+                            Select Size: <span id="size-label" class="text-slao-maroon copyable-text">M</span>
+                        </label>
+                        <div id="size-box" class="flex flex-wrap gap-2">
+                            <button type="button" data-size="S" onclick="setSize('S', this)" class="size-opt px-4 py-2 text-xs font-bold border border-gray-300 rounded-xl">S</button>
+                            <button type="button" data-size="M" onclick="setSize('M', this)" class="size-opt px-4 py-2 text-xs font-bold border border-slao-maroon bg-slao-maroon text-white rounded-xl">M</button>
+                            <button type="button" data-size="L" onclick="setSize('L', this)" class="size-opt px-4 py-2 text-xs font-bold border border-gray-300 rounded-xl">L</button>
+                            <button type="button" data-size="XL" onclick="setSize('XL', this)" class="size-opt px-4 py-2 text-xs font-bold border border-gray-300 rounded-xl">XL</button>
+                        </div>
+                    </div>
+
+                    <!-- Color Selection -->
+                    <div class="mt-5">
+                        <label class="block text-xs font-bold uppercase text-gray-700 mb-2">
+                            Select Color: <span id="color-label" class="text-slao-maroon copyable-text"></span>
+                        </label>
+                        <div id="color-box" class="flex flex-wrap gap-2"></div>
+                    </div>
+
+                    <div class="mt-5">
+                        <label class="block text-xs font-bold uppercase text-gray-700 mb-2">Quantity</label>
+                        <div class="flex items-center gap-3">
+                            <button type="button" onclick="changeQty(-1)" class="w-9 h-9 border rounded-lg font-bold">-</button>
+                            <span id="qty-val" class="font-bold w-6 text-center copyable-text">1</span>
+                            <button type="button" onclick="changeQty(1)" class="w-9 h-9 border rounded-lg font-bold">+</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="space-y-3 pt-4 border-t">
+                    <button type="button" onclick="addProductToCart()" class="w-full py-3.5 bg-slao-maroon hover:bg-slao-maroonDark text-white font-bold rounded-xl text-xs uppercase tracking-wider transition">
+                        <i class="fa-solid fa-bag-shopping mr-2"></i> Add to Cart
+                    </button>
+
+                    <button type="button" onclick="orderWhatsApp()" class="w-full py-3.5 bg-emerald-600 hover:bg-emerald-700 text-white font-bold rounded-xl text-xs uppercase tracking-wider transition">
+                        <i class="fa-brands fa-whatsapp mr-2 text-base"></i> Order via WhatsApp
+                    </button>
+
+                    <button type="button" onclick="goToBuyNow()" class="w-full py-3.5 bg-slao-gold hover:bg-yellow-500 text-gray-900 font-extrabold rounded-xl text-xs uppercase tracking-wider transition shadow">
+                        <i class="fa-solid fa-bolt mr-2"></i> Buy Now
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Verified Customer Reviews Section (Displayed only if reviews exist after ordering) -->
+        <div id="verified-reviews-card" class="hidden bg-white rounded-3xl shadow-lg p-6 sm:p-8 space-y-4">
+            <div class="flex items-center justify-between border-b pb-3">
+                <h2 class="font-serif text-xl font-bold text-slao-maroon copyable-text">Verified Customer Reviews</h2>
+                <span class="text-xs text-gray-500 copyable-text">Submitted after order confirmation</span>
+            </div>
+            <div id="reviews-list" class="space-y-3"></div>
+        </div>
+    </div>
+
+    
+    <!-- Features / Value Proposition Banner -->
+    <section class="bg-slao-maroon text-white py-12 border-t border-slao-gold/30">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 text-center">
+                <div class="space-y-2">
+                    <i class="fa-solid fa-truck-fast text-3xl text-slao-gold mb-2"></i>
+                    <h4 class="font-serif font-bold text-lg copyable-text">Fast Delivery</h4>
+                    <p class="text-xs text-gray-300 copyable-text">Reliable nationwide shipping across Pakistan</p>
+                </div>
+                <div class="space-y-2">
+                    <i class="fa-solid fa-shield-halved text-3xl text-slao-gold mb-2"></i>
+                    <h4 class="font-serif font-bold text-lg copyable-text">100% Authentic Quality</h4>
+                    <p class="text-xs text-gray-300 copyable-text">Premium fabric & original designer prints</p>
+                </div>
+                <div class="space-y-2">
+                    <i class="fa-solid fa-arrow-rotate-left text-3xl text-slao-gold mb-2"></i>
+                    <h4 class="font-serif font-bold text-lg copyable-text">Easy 7-Day Returns</h4>
+                    <p class="text-xs text-gray-300 copyable-text">Hassle-free return and exchange policy</p>
+                </div>
+                <a href="tel:+923329975035" class="block space-y-2 group rounded-2xl p-2 hover:bg-white/10 transition cursor-pointer" title="Call Customer Care: +92 3329975035">
+                    <i class="fa-solid fa-headset text-3xl text-slao-gold mb-2 group-hover:scale-110 transition-transform"></i>
+                    <h4 class="font-serif font-bold text-lg group-hover:text-slao-gold transition">24/7 Customer Care</h4>
+                    <p class="text-xs text-gray-300">Tap to Call: +92 3329975035</p>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-slao-charcoal text-gray-300 pt-16 pb-8 border-t border-gray-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10 pb-12 border-b border-gray-800">
+                <div class="lg:col-span-2 space-y-4">
+                    <span class="font-serif text-4xl font-extrabold tracking-widest text-white">SLAO</span>
+                    <span class="block text-xs tracking-[0.3em] font-semibold text-slao-gold uppercase -mt-2">Wear Your Style</span>
+                    <p class="text-sm text-gray-400 font-light pr-6 leading-relaxed copyable-text">
+                        SLAO brings you high-end pret, unstitched luxury fabrics, and contemporary fashion designed to make every moment memorable. Blend tradition with modern flair.
+                    </p>
+                    <div class="flex space-x-4 pt-2">
+                        <a href="#" class="w-9 h-9 rounded-full bg-gray-800 hover:bg-slao-maroon text-white flex items-center justify-center transition"><i class="fa-brands fa-facebook-f"></i></a>
+                        <a href="#" class="w-9 h-9 rounded-full bg-gray-800 hover:bg-slao-maroon text-white flex items-center justify-center transition"><i class="fa-brands fa-instagram"></i></a>
+                        <a href="https://wa.me/923329975035" target="_blank" class="w-9 h-9 rounded-full bg-gray-800 hover:bg-slao-maroon text-white flex items-center justify-center transition"><i class="fa-brands fa-whatsapp"></i></a>
+                        <a href="#" class="w-9 h-9 rounded-full bg-gray-800 hover:bg-slao-maroon text-white flex items-center justify-center transition"><i class="fa-brands fa-tiktok"></i></a>
+                    </div>
+                </div>
+
+                <div>
+                    <h5 class="text-white font-serif font-bold text-base mb-4 tracking-wider uppercase copyable-text">Shop Categories</h5>
+                    <ul class="space-y-2.5 text-sm">
+                        <li><a href="collections/unstitched/index.html" class="hover:text-slao-gold transition">Unstitched 3-Piece</a></li>
+                        <li><a href="collections/ready-to-wear/index.html" class="hover:text-slao-gold transition">Stitched Pret Kurtis</a></li>
+                        <li><a href="collections/ready-to-wear/index.html" class="hover:text-slao-gold transition">Luxury Festive Wear</a></li>
+                        <li><a href="collections/western/index.html" class="hover:text-slao-gold transition">Western Collection</a></li>
+                        <li><a href="collections/sale/index.html" class="hover:text-slao-gold transition">Sale / Clearance</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h5 class="text-white font-serif font-bold text-base mb-4 tracking-wider uppercase copyable-text">Customer Support</h5>
+                    <ul class="space-y-2.5 text-sm">
+                        <li><a href="tel:+923329975035" class="hover:text-slao-gold transition">Call Customer Care (+92 3329975035)</a></li>
+                        <li><a href="track-order.html" class="hover:text-slao-gold transition">Track Your Order</a></li>
+                        
+                        <li><a href="#" class="hover:text-slao-gold transition">Return & Exchange Policy</a></li>
+                        <li><a href="#" class="hover:text-slao-gold transition">Fabric Care Guide</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h5 class="text-white font-serif font-bold text-base mb-4 tracking-wider uppercase copyable-text">Stay Updated</h5>
+                    <p class="text-xs text-gray-400 mb-3 copyable-text">Subscribe to receive exclusive offers and luxury collection launches.</p>
+                    <form onsubmit="event.preventDefault(); alert('Thank you for subscribing to SLAO updates!');" class="space-y-2">
+                        <input type="email" required placeholder="Enter your email" class="w-full px-3 py-2 bg-gray-800 text-white rounded-lg text-sm focus:outline-none focus:ring-1 focus:ring-slao-gold">
+                        <button type="submit" class="w-full py-2 bg-slao-maroon hover:bg-slao-maroonDark text-white text-xs font-semibold rounded-lg uppercase tracking-wider transition">Subscribe</button>
+                    </form>
+                </div>
+            </div>
+
+            <div class="mt-8 flex flex-col md:flex-row justify-between items-center text-xs text-gray-500 gap-4">
+                <p class="copyable-text">&copy; 2026 SLAO (Wear Your Style). All Rights Reserved.</p>
+                <div class="flex space-x-4 text-lg text-gray-400">
+                    <i class="fa-brands fa-cc-visa"></i>
+                    <i class="fa-brands fa-cc-mastercard"></i>
+                    <i class="fa-solid fa-money-bill-wave" title="Cash on Delivery Available"></i>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+
+    <script src="store.js"></script>
+    <script>
+        const params = new URLSearchParams(window.location.search);
+        const prodId = Number(params.get('id')) || 1;
+        const product = SLAO_PRODUCTS.find(item => item.id === prodId) || SLAO_PRODUCTS[0];
+
+        const initialColorParam = params.get('color');
+        let selectedSize = 'M';
+        let selectedColor = (initialColorParam && product.colors.includes(initialColorParam))
+            ? initialColorParam
+            : product.colors[0];
+        let qty = 1;
+
+        function getCurrentUnitPrice() {
+            return getPriceForSize(product, selectedSize);
+        }
+
+        function getCurrentImageSrc() {
+            return resolveProductImage(getImageForColor(product, selectedColor), "");
+        }
+
+        function refreshPrice() {
+            const unitPrice = getCurrentUnitPrice();
+            document.getElementById('prod-price').innerText = `Rs. ${unitPrice.toLocaleString()}`;
+            document.getElementById('size-label').innerText = selectedSize;
+        }
+
+        function updateColorPreview() {
+            document.getElementById('prod-img').src = getCurrentImageSrc();
+            document.getElementById('color-label').innerText = selectedColor;
+        }
+
+        document.getElementById('cart-count').innerText = getCartCount();
+        document.getElementById('prod-cat').innerText = product.category;
+        document.getElementById('prod-title').innerText = product.name;
+        document.getElementById('prod-desc').innerText = product.description;
+
+        const colorBox = document.getElementById('color-box');
+        product.colors.forEach((c) => {
+            const btn = document.createElement('button');
+            btn.type = 'button';
+            btn.innerText = c;
+            const isActive = c === selectedColor;
+            btn.className = `color-opt px-3.5 py-1.5 text-xs font-bold border rounded-xl ${
+                isActive ? 'border-slao-maroon bg-slao-maroon text-white' : 'border-gray-300 text-gray-700'
+            }`;
+            btn.onclick = () => {
+                selectedColor = c;
+                updateColorPreview();
+                document.querySelectorAll('.color-opt').forEach(el => {
+                    el.className = 'color-opt px-3.5 py-1.5 text-xs font-bold border rounded-xl border-gray-300 text-gray-700';
+                });
+                btn.className = 'color-opt px-3.5 py-1.5 text-xs font-bold border rounded-xl border-slao-maroon bg-slao-maroon text-white';
+            };
+            colorBox.appendChild(btn);
+        });
+
+        updateColorPreview();
+        refreshPrice();
+
+        function renderVerifiedReviews() {
+            const allReviews = JSON.parse(localStorage.getItem('slao_reviews') || '[]');
+            const prodReviews = allReviews.filter(r => Number(r.productId) === product.id);
+            if (prodReviews.length === 0) return;
+
+            const card = document.getElementById('verified-reviews-card');
+            const list = document.getElementById('reviews-list');
+            card.classList.remove('hidden');
+            list.innerHTML = prodReviews.map(r => `
+                <div class="p-4 bg-slao-cream/70 border border-gray-200 rounded-2xl space-y-1">
+                    <div class="flex items-center justify-between">
+                        <span class="text-sm font-bold text-gray-900 copyable-text">${r.customerName} <span class="text-[10px] font-semibold text-emerald-700 bg-emerald-100 px-2 py-0.5 rounded-full ml-1">Verified Buyer</span></span>
+                        <span class="text-xs font-bold text-amber-500">${'★'.repeat(r.rating)}${'☆'.repeat(5 - r.rating)}</span>
+                    </div>
+                    <p class="text-xs text-gray-700 copyable-text">${r.comment}</p>
+                    <p class="text-[10px] text-gray-400 copyable-text">Order ID: ${r.voucherId} &bull; ${r.date}</p>
+                </div>
+            `).join('');
+        }
+        renderVerifiedReviews();
+
+        function setSize(size, btn) {
+            selectedSize = size;
+            document.querySelectorAll('.size-opt').forEach(el => {
+                el.className = 'size-opt px-4 py-2 text-xs font-bold border rounded-xl border-gray-300 text-gray-700';
+            });
+            btn.className = 'size-opt px-4 py-2 text-xs font-bold border rounded-xl border-slao-maroon bg-slao-maroon text-white';
+            refreshPrice();
+        }
+
+        function changeQty(delta) {
+            qty = Math.max(1, qty + delta);
+            document.getElementById('qty-val').innerText = qty;
+            refreshPrice();
+        }
+
+        function buildOrderPayload() {
+            return {
+                id: product.id,
+                name: product.name,
+                price: getCurrentUnitPrice(),
+                image: getImageForColor(product, selectedColor),
+                size: selectedSize,
+                color: selectedColor,
+                quantity: qty
+            };
+        }
+
+        function addProductToCart() {
+            const cart = getCart();
+            const item = buildOrderPayload();
+            const existing = cart.find(x => x.id === item.id && x.size === item.size && x.color === item.color);
+            if (existing) existing.quantity += item.quantity;
+            else cart.push(item);
+            saveCart(cart);
+            document.getElementById('cart-count').innerText = getCartCount();
+            alert(`${item.name} (${item.color}, Size ${item.size} - Rs. ${item.price.toLocaleString()}) has been added to your bag.`);
+        }
+
+        function orderWhatsApp() {
+            const item = buildOrderPayload();
+            const sub = item.price * item.quantity;
+            const total = sub;
+            const msg = `Hello SLAO Team, I would like to place an order:
+Product: ${item.name}
+Color: ${item.color}
+Size: ${item.size}
+Price: Rs. ${item.price.toLocaleString()}
+Qty: ${item.quantity}
+Subtotal: Rs. ${sub.toLocaleString()}
+Estimated Total: Rs. ${total.toLocaleString()}`;
+            window.open(`https://wa.me/923329975035?text=${encodeURIComponent(msg)}`, '_blank');
+        }
+
+        function goToBuyNow() {
+            const item = buildOrderPayload();
+            localStorage.setItem('slao_buy_now', JSON.stringify(item));
+            localStorage.setItem('slao_checkout_mode', 'SINGLE');
+            window.location.href = 'checkout.html';
+        }
+    </script>
+</body>
+</html>
