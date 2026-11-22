@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ready To Wear (Pret) - SLAO</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        slao: { maroon: '#6b182b', maroonDark: '#4a0f1d', gold: '#d4af37', cream: '#fcf8f3', charcoal: '#1c1c1c' }
+                    },
+                    fontFamily: { serif: ['Cinzel', 'serif'], sans: ['Plus Jakarta Sans', 'sans-serif'] }
+                }
+            }
+        }
+    </script>
+    <style>
+        
+        ::selection {
+            background-color: #6b182b;
+            color: #f3e8c9;
+        }
+        ::-moz-selection {
+            background-color: #6b182b;
+            color: #f3e8c9;
+        }
+        .copyable-text {
+            cursor: text;
+        }
+        
+
+    </style>
+</head>
+<body class="bg-slao-cream text-gray-900 min-h-screen flex flex-col">
+    
+    <!-- Top Announcement Bar -->
+    <div class="bg-slao-maroon text-white text-xs md:text-sm tracking-wider py-2 px-6 flex justify-between items-center">
+        <span class="hidden md:inline-block copyable-text"><i class="fa-solid fa-sparkles mr-2"></i> Nationwide Delivery Across Pakistan</span>
+        <span class="w-full md:w-auto text-center font-semibold copyable-text">MID-SUMMER SALE IS LIVE! UP TO 40% OFF</span>
+        <span class="hidden md:inline-block"><i class="fa-solid fa-phone mr-1"></i><a href="tel:+923329975035" class="hover:text-slao-gold transition">+92 3329975035</a></span>
+    </div>
+
+    <!-- Header -->
+    <header class="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-gray-200 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-20">
+            <div class="flex items-center lg:hidden">
+                <button id="mobile-menu-btn" onclick="document.getElementById('mobile-menu').classList.toggle('hidden')" class="p-2 text-slao-charcoal hover:text-slao-maroon"><i class="fa-solid fa-bars text-2xl"></i></button>
+            </div>
+
+            <a href="../../index.html" class="flex-shrink-0 flex items-center">
+                <div>
+                    <span class="font-serif text-3xl sm:text-4xl font-extrabold tracking-widest text-slao-maroon">SLAO</span>
+                    <span class="block text-[10px] tracking-[0.3em] font-semibold text-slao-gold uppercase -mt-1">Wear Your Style</span>
+                </div>
+            </a>
+
+            <nav class="hidden lg:flex space-x-8 text-sm font-semibold tracking-wide uppercase">
+                <a href="../../index.html" class="text-gray-700 hover:text-slao-maroon py-1">New Arrivals</a>
+                <a href="../../collections/unstitched/index.html" class="text-gray-700 hover:text-slao-maroon py-1">Unstitched</a>
+                <a href="../../collections/ready-to-wear/index.html" class="text-slao-maroon border-b-2 border-slao-maroon py-1 font-bold">Ready To Wear</a>
+                <a href="../../collections/western/index.html" class="text-gray-700 hover:text-slao-maroon py-1">Western</a>
+                <a href="../../collections/sale/index.html" class="text-rose-600 font-bold hover:text-rose-700 py-1"><i class="fa-solid fa-fire text-xs mr-1"></i> Sale %</a>
+            </nav>
+
+            <div class="flex items-center space-x-4">
+                <a href="../../index.html#products-section" class="text-gray-700 hover:text-slao-maroon p-2" title="Search"><i class="fa-solid fa-magnifying-glass text-xl"></i></a>
+                <a href="../../checkout.html" onclick="localStorage.setItem('slao_checkout_mode','CART')" class="text-gray-700 hover:text-slao-maroon p-2 relative" title="Shopping Cart">
+                    <i class="fa-solid fa-bag-shopping text-2xl"></i>
+                    <span id="cart-count" class="absolute top-0 right-0 bg-slao-maroon text-white text-[11px] font-bold w-5 h-5 rounded-full flex items-center justify-center border-2 border-white">0</span>
+                </a>
+            </div>
+        </div>
+
+        <div id="mobile-menu" class="hidden lg:hidden bg-white border-b border-gray-200 px-4 pt-2 pb-6 space-y-2">
+            <a href="../../index.html" class="block py-2 px-3 text-base font-semibold text-slao-maroon bg-slao-cream rounded-md">New Arrivals</a>
+            <a href="../../collections/unstitched/index.html" class="block py-2 px-3 text-base font-medium text-gray-700 hover:bg-gray-50 rounded-md">Unstitched Lawn</a>
+            <a href="../../collections/ready-to-wear/index.html" class="block py-2 px-3 text-base font-medium text-gray-700 hover:bg-gray-50 rounded-md">Ready To Wear</a>
+            <a href="../../collections/western/index.html" class="block py-2 px-3 text-base font-medium text-gray-700 hover:bg-gray-50 rounded-md">Western Collection</a>
+            <a href="../../collections/sale/index.html" class="block py-2 px-3 text-base font-semibold text-rose-600 hover:bg-rose-50 rounded-md">Sale</a>
+        </div>
+    </header>
+
+
+    <div class="max-w-7xl mx-auto w-full p-4 sm:p-8 flex-grow">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between border-b pb-5 mb-8 gap-4">
+            <div>
+                <a href="../../index.html" class="text-xs font-bold text-slao-maroon hover:underline"><i class="fa-solid fa-arrow-left mr-1"></i> Back to Home</a>
+                <h1 class="font-serif text-3xl font-bold text-slao-maroon mt-2 copyable-text">Ready To Wear (Pret)</h1>
+                <p class="text-sm text-gray-500 copyable-text">Stitched Kurtis & Festive Suits</p>
+            </div>
+            <div class="flex flex-wrap gap-2 text-xs font-semibold">
+                <a href="../unstitched/index.html" class="px-3.5 py-2 rounded-full border border-gray-300 bg-white hover:border-slao-maroon">Unstitched</a>
+                <a href="../ready-to-wear/index.html" class="px-3.5 py-2 rounded-full border border-gray-300 bg-white hover:border-slao-maroon">Ready To Wear</a>
+                <a href="../western/index.html" class="px-3.5 py-2 rounded-full border border-gray-300 bg-white hover:border-slao-maroon">Western</a>
+                <a href="../sale/index.html" class="px-3.5 py-2 rounded-full border border-rose-300 bg-white text-rose-600 hover:bg-rose-50">Sale</a>
+            </div>
+        </div>
+
+        <div id="col-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6"></div>
+    </div>
+
+    
+    <!-- Features / Value Proposition Banner -->
+    <section class="bg-slao-maroon text-white py-12 border-t border-slao-gold/30">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 text-center">
+                <div class="space-y-2">
+                    <i class="fa-solid fa-truck-fast text-3xl text-slao-gold mb-2"></i>
+                    <h4 class="font-serif font-bold text-lg copyable-text">Fast Delivery</h4>
+                    <p class="text-xs text-gray-300 copyable-text">Reliable nationwide shipping across Pakistan</p>
+                </div>
+                <div class="space-y-2">
+                    <i class="fa-solid fa-shield-halved text-3xl text-slao-gold mb-2"></i>
+                    <h4 class="font-serif font-bold text-lg copyable-text">100% Authentic Quality</h4>
+                    <p class="text-xs text-gray-300 copyable-text">Premium fabric & original designer prints</p>
+                </div>
+                <div class="space-y-2">
+                    <i class="fa-solid fa-arrow-rotate-left text-3xl text-slao-gold mb-2"></i>
+                    <h4 class="font-serif font-bold text-lg copyable-text">Easy 7-Day Returns</h4>
+                    <p class="text-xs text-gray-300 copyable-text">Hassle-free return and exchange policy</p>
+                </div>
+                <a href="tel:+923329975035" class="block space-y-2 group rounded-2xl p-2 hover:bg-white/10 transition cursor-pointer" title="Call Customer Care: +92 3329975035">
+                    <i class="fa-solid fa-headset text-3xl text-slao-gold mb-2 group-hover:scale-110 transition-transform"></i>
+                    <h4 class="font-serif font-bold text-lg group-hover:text-slao-gold transition">24/7 Customer Care</h4>
+                    <p class="text-xs text-gray-300">Tap to Call: +92 3329975035</p>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-slao-charcoal text-gray-300 pt-16 pb-8 border-t border-gray-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10 pb-12 border-b border-gray-800">
+                <div class="lg:col-span-2 space-y-4">
+                    <span class="font-serif text-4xl font-extrabold tracking-widest text-white">SLAO</span>
+                    <span class="block text-xs tracking-[0.3em] font-semibold text-slao-gold uppercase -mt-2">Wear Your Style</span>
+                    <p class="text-sm text-gray-400 font-light pr-6 leading-relaxed copyable-text">
+                        SLAO brings you high-end pret, unstitched luxury fabrics, and contemporary fashion designed to make every moment memorable. Blend tradition with modern flair.
+                    </p>
+                    <div class="flex space-x-4 pt-2">
+                        <a href="#" class="w-9 h-9 rounded-full bg-gray-800 hover:bg-slao-maroon text-white flex items-center justify-center transition"><i class="fa-brands fa-facebook-f"></i></a>
+                        <a href="#" class="w-9 h-9 rounded-full bg-gray-800 hover:bg-slao-maroon text-white flex items-center justify-center transition"><i class="fa-brands fa-instagram"></i></a>
+                        <a href="https://wa.me/923329975035" target="_blank" class="w-9 h-9 rounded-full bg-gray-800 hover:bg-slao-maroon text-white flex items-center justify-center transition"><i class="fa-brands fa-whatsapp"></i></a>
+                        <a href="#" class="w-9 h-9 rounded-full bg-gray-800 hover:bg-slao-maroon text-white flex items-center justify-center transition"><i class="fa-brands fa-tiktok"></i></a>
+                    </div>
+                </div>
+
+                <div>
+                    <h5 class="text-white font-serif font-bold text-base mb-4 tracking-wider uppercase copyable-text">Shop Categories</h5>
+                    <ul class="space-y-2.5 text-sm">
+                        <li><a href="../../collections/unstitched/index.html" class="hover:text-slao-gold transition">Unstitched 3-Piece</a></li>
+                        <li><a href="../../collections/ready-to-wear/index.html" class="hover:text-slao-gold transition">Stitched Pret Kurtis</a></li>
+                        <li><a href="../../collections/ready-to-wear/index.html" class="hover:text-slao-gold transition">Luxury Festive Wear</a></li>
+                        <li><a href="../../collections/western/index.html" class="hover:text-slao-gold transition">Western Collection</a></li>
+                        <li><a href="../../collections/sale/index.html" class="hover:text-slao-gold transition">Sale / Clearance</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h5 class="text-white font-serif font-bold text-base mb-4 tracking-wider uppercase copyable-text">Customer Support</h5>
+                    <ul class="space-y-2.5 text-sm">
+                        <li><a href="tel:+923329975035" class="hover:text-slao-gold transition">Call Customer Care (+92 3329975035)</a></li>
+                        <li><a href="../../track-order.html" class="hover:text-slao-gold transition">Track Your Order</a></li>
+                        
+                        <li><a href="#" class="hover:text-slao-gold transition">Return & Exchange Policy</a></li>
+                        <li><a href="#" class="hover:text-slao-gold transition">Fabric Care Guide</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h5 class="text-white font-serif font-bold text-base mb-4 tracking-wider uppercase copyable-text">Stay Updated</h5>
+                    <p class="text-xs text-gray-400 mb-3 copyable-text">Subscribe to receive exclusive offers and luxury collection launches.</p>
+                    <form onsubmit="event.preventDefault(); alert('Thank you for subscribing to SLAO updates!');" class="space-y-2">
+                        <input type="email" required placeholder="Enter your email" class="w-full px-3 py-2 bg-gray-800 text-white rounded-lg text-sm focus:outline-none focus:ring-1 focus:ring-slao-gold">
+                        <button type="submit" class="w-full py-2 bg-slao-maroon hover:bg-slao-maroonDark text-white text-xs font-semibold rounded-lg uppercase tracking-wider transition">Subscribe</button>
+                    </form>
+                </div>
+            </div>
+
+            <div class="mt-8 flex flex-col md:flex-row justify-between items-center text-xs text-gray-500 gap-4">
+                <p class="copyable-text">&copy; 2026 SLAO (Wear Your Style). All Rights Reserved.</p>
+                <div class="flex space-x-4 text-lg text-gray-400">
+                    <i class="fa-brands fa-cc-visa"></i>
+                    <i class="fa-brands fa-cc-mastercard"></i>
+                    <i class="fa-solid fa-money-bill-wave" title="Cash on Delivery Available"></i>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+
+    <script src="../../store.js"></script>
+    <script>
+        document.getElementById('cart-count').innerText = getCartCount();
+        const slug = "ready-to-wear";
+        const selectedColorMap = {};
+
+        let items = SLAO_PRODUCTS;
+        if (slug === "sale") items = SLAO_PRODUCTS.filter(p => p.isSale);
+        else if (slug === "ready-to-wear") items = SLAO_PRODUCTS.filter(p => p.category === "ready");
+        else items = SLAO_PRODUCTS.filter(p => p.category === slug);
+
+        function openColProduct(prodId) {
+            const c = selectedColorMap[prodId] || '';
+            const q = c ? `?id=${prodId}&color=${encodeURIComponent(c)}` : `?id=${prodId}`;
+            window.location.href = `../../product.html${q}`;
+        }
+
+        function pickColColor(prodId, colorName, btnEl) {
+            selectedColorMap[prodId] = colorName;
+            const prod = SLAO_PRODUCTS.find(p => p.id === prodId);
+            if (!prod) return;
+            const imgEl = document.getElementById(`col-img-${prodId}`);
+            if (imgEl) imgEl.src = resolveProductImage(getImageForColor(prod, colorName), "../../");
+
+            const cardEl = document.getElementById(`col-card-${prodId}`);
+            if (cardEl) {
+                cardEl.querySelectorAll('.col-color-btn').forEach(b => {
+                    b.className = 'col-color-btn px-2 py-0.5 text-[10px] font-bold rounded border border-gray-300 text-gray-700 bg-white';
+                });
+                btnEl.className = 'col-color-btn px-2 py-0.5 text-[10px] font-bold rounded border border-slao-maroon bg-slao-maroon text-white';
+            }
+        }
+
+        const grid = document.getElementById('col-grid');
+        items.forEach(p => {
+            const activeColor = p.colors[0];
+            selectedColorMap[p.id] = activeColor;
+            const imgSrc = resolveProductImage(getImageForColor(p, activeColor), "../../");
+
+            const card = document.createElement('div');
+            card.id = `col-card-${p.id}`;
+            card.className = "bg-white rounded-2xl overflow-hidden border shadow-sm hover:shadow-xl transition flex flex-col";
+
+            const btnsHtml = p.colors.map(c => `
+                <button type="button"
+                    onclick="event.stopPropagation(); pickColColor(${p.id}, '${c}', this)"
+                    class="col-color-btn px-2 py-0.5 text-[10px] font-bold rounded border ${
+                        c === activeColor
+                            ? 'border-slao-maroon bg-slao-maroon text-white'
+                            : 'border-gray-300 text-gray-700 bg-white'
+                    }">${c}</button>
+            `).join('');
+
+            card.innerHTML = `
+                <div onclick="openColProduct(${p.id})" class="aspect-[3/4] bg-gray-100 overflow-hidden cursor-pointer">
+                    <img id="col-img-${p.id}" src="${imgSrc}" alt="${p.name}" class="w-full h-full object-cover">
+                </div>
+                <div class="p-4 flex-1 flex flex-col justify-between">
+                    <div>
+                        <h3 onclick="openColProduct(${p.id})" class="font-bold text-base cursor-pointer hover:text-slao-maroon copyable-text">${p.name}</h3>
+                        <div class="flex flex-wrap gap-1 mt-2">${btnsHtml}</div>
+                    </div>
+                    <div class="mt-4 flex items-center justify-between border-t pt-3">
+                        <span class="font-bold text-slao-maroon copyable-text">Rs. ${p.price.toLocaleString()}</span>
+                        <button type="button" onclick="openColProduct(${p.id})" class="text-xs font-bold bg-slao-maroon text-white px-3 py-1.5 rounded-lg">Order Now</button>
+                    </div>
+                </div>
+            `;
+            grid.appendChild(card);
+        });
+    </script>
+</body>
+</html>

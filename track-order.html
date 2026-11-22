@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Track Your Order - SLAO</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        slao: { maroon: '#6b182b', maroonDark: '#4a0f1d', gold: '#d4af37', cream: '#fcf8f3', charcoal: '#1c1c1c' }
+                    },
+                    fontFamily: { serif: ['Cinzel', 'serif'], sans: ['Plus Jakarta Sans', 'sans-serif'] }
+                }
+            }
+        }
+    </script>
+    <style>
+        ::selection { background-color: #6b182b; color: #f3e8c9; }
+        ::-moz-selection { background-color: #6b182b; color: #f3e8c9; }
+        .copyable-text { cursor: text; }
+    </style>
+</head>
+<body class="bg-slao-cream text-gray-900 min-h-screen flex flex-col">
+
+    <!-- Top Announcement Bar -->
+    <div class="bg-slao-maroon text-white text-xs md:text-sm tracking-wider py-2 px-6 flex justify-between items-center">
+        <span class="hidden md:inline-block copyable-text"><i class="fa-solid fa-sparkles mr-2"></i> Nationwide Delivery Across Pakistan</span>
+        <span class="w-full md:w-auto text-center font-semibold copyable-text">MID-SUMMER SALE IS LIVE! UP TO 40% OFF</span>
+        <span class="hidden md:inline-block"><i class="fa-solid fa-phone mr-1"></i><a href="tel:+923329975035" class="hover:text-slao-gold transition">+92 3329975035</a></span>
+    </div>
+
+    <!-- Header -->
+    <header class="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-gray-200 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-20">
+            <a href="index.html" class="flex-shrink-0 flex items-center">
+                <div>
+                    <span class="font-serif text-3xl sm:text-4xl font-extrabold tracking-widest text-slao-maroon">SLAO</span>
+                    <span class="block text-[10px] tracking-[0.3em] font-semibold text-slao-gold uppercase -mt-1">Wear Your Style</span>
+                </div>
+            </a>
+            <nav class="hidden lg:flex space-x-8 text-sm font-semibold tracking-wide uppercase">
+                <a href="index.html" class="text-gray-700 hover:text-slao-maroon py-1">New Arrivals</a>
+                <a href="collections/unstitched/index.html" class="text-gray-700 hover:text-slao-maroon py-1">Unstitched</a>
+                <a href="collections/ready-to-wear/index.html" class="text-gray-700 hover:text-slao-maroon py-1">Ready To Wear</a>
+                <a href="collections/western/index.html" class="text-gray-700 hover:text-slao-maroon py-1">Western</a>
+                <a href="track-order.html" class="text-slao-maroon border-b-2 border-slao-maroon py-1 font-bold">Track Order</a>
+            </nav>
+            <a href="index.html" class="text-xs font-bold uppercase text-slao-maroon hover:underline">Back to Shop</a>
+        </div>
+    </header>
+
+    <main class="max-w-4xl mx-auto w-full p-4 sm:p-8 flex-grow space-y-6">
+        <!-- Tracking Search Card -->
+        <div class="bg-white p-6 sm:p-8 rounded-3xl shadow-lg space-y-4">
+            <h1 class="font-serif text-2xl sm:text-3xl font-bold text-slao-maroon copyable-text">Track Your Order</h1>
+            <p class="text-xs sm:text-sm text-gray-600 copyable-text">Enter your tracking number below or scan the QR code on your order slip to view your live order status.</p>
+
+            <div class="space-y-1.5">
+                <label for="track-order-input" class="block text-xs font-bold uppercase tracking-wider text-gray-600 copyable-text">Tracking Number</label>
+                <div class="flex flex-col sm:flex-row gap-3">
+                    <input id="track-order-input" type="text" placeholder="Enter Tracking Number (e.g. SLAO-123456)" onkeydown="if(event.key==='Enter') searchOrder()" class="flex-1 p-3.5 text-sm border border-gray-300 rounded-xl font-mono uppercase focus:outline-none focus:ring-2 focus:ring-slao-maroon">
+                    <button type="button" onclick="searchOrder()" class="px-7 py-3.5 bg-slao-maroon hover:bg-slao-maroonDark text-white text-xs font-bold rounded-xl uppercase tracking-wider shadow transition">
+                        Track Your Order
+                    </button>
+                </div>
+            </div>
+
+            <!-- Error Alert when invalid or empty tracking number is entered -->
+            <div id="track-not-found" class="hidden bg-rose-50 border border-rose-300 text-rose-700 p-4 rounded-2xl text-xs sm:text-sm font-semibold flex items-center gap-3">
+                <i class="fa-solid fa-circle-exclamation text-lg text-rose-600"></i>
+                <span id="track-error-msg">Invalid tracking number. Please check your Order ID and try again.</span>
+            </div>
+        </div>
+
+        <!-- Customer Read-Only Order Status & Details -->
+        <div id="track-result-box" class="hidden bg-white p-6 sm:p-8 rounded-3xl shadow-lg space-y-6">
+            <div class="flex flex-col sm:flex-row justify-between sm:items-center border-b pb-4 gap-2">
+                <div>
+                    <p class="text-xs text-gray-500 uppercase copyable-text">Tracking Number</p>
+                    <h2 id="res-order-id" class="font-mono text-2xl font-extrabold text-slao-maroon copyable-text"></h2>
+                    <p id="res-order-date" class="text-xs text-gray-500 copyable-text"></p>
+                </div>
+                <div class="sm:text-right">
+                    <p class="text-[11px] text-gray-400 uppercase mb-1">Current Status</p>
+                    <span id="res-current-badge" class="inline-block px-4 py-1.5 rounded-full text-xs font-extrabold uppercase bg-amber-100 text-amber-800"></span>
+                </div>
+            </div>
+
+            <!-- Read-Only Progress Steps -->
+            <div class="grid grid-cols-2 sm:grid-cols-5 gap-3 text-center">
+                <div id="step-confirmed" class="p-3 rounded-2xl border bg-gray-50 space-y-1">
+                    <i class="fa-solid fa-circle-check text-lg"></i>
+                    <p class="text-xs font-bold">Order Confirmed</p>
+                </div>
+                <div id="step-packing" class="p-3 rounded-2xl border bg-gray-50 space-y-1">
+                    <i class="fa-solid fa-box-open text-lg"></i>
+                    <p class="text-xs font-bold">Packing Pending</p>
+                </div>
+                <div id="step-dispatch" class="p-3 rounded-2xl border bg-gray-50 space-y-1">
+                    <i class="fa-solid fa-truck-fast text-lg"></i>
+                    <p class="text-xs font-bold">Dispatch Pending</p>
+                </div>
+                <div id="step-delivered" class="p-3 rounded-2xl border bg-gray-50 space-y-1">
+                    <i class="fa-solid fa-house-circle-check text-lg"></i>
+                    <p class="text-xs font-bold">Delivery Complete</p>
+                </div>
+                <div id="step-return" class="p-3 rounded-2xl border bg-gray-50 space-y-1">
+                    <i class="fa-solid fa-rotate-left text-lg"></i>
+                    <p class="text-xs font-bold">Return Order</p>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 pt-2">
+                <div class="bg-slao-cream p-4 rounded-2xl border space-y-1.5 text-xs">
+                    <h3 class="font-bold text-slao-maroon uppercase tracking-wider mb-2 copyable-text">Customer &amp; Delivery Details</h3>
+                    <p><b>Customer Name:</b> <span id="res-name" class="copyable-text"></span></p>
+                    <p><b>Contact Number:</b> <span id="res-phone" class="copyable-text"></span></p>
+                    <p><b>City / Province:</b> <span id="res-location" class="copyable-text"></span></p>
+                    <p><b>Address:</b> <span id="res-address" class="copyable-text"></span></p>
+                    <p><b>Payment Method:</b> <span id="res-payment" class="copyable-text"></span></p>
+                </div>
+                <div class="bg-gray-50 p-4 rounded-2xl border space-y-2 text-xs">
+                    <h3 class="font-bold text-slao-maroon uppercase tracking-wider mb-2 copyable-text">Order Summary</h3>
+                    <div id="res-items" class="divide-y"></div>
+                    <div class="border-t pt-2 flex justify-between font-bold text-sm text-slao-maroon">
+                        <span>Total Amount</span>
+                        <span id="res-total" class="copyable-text"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-slao-charcoal text-gray-300 pt-12 pb-8 border-t border-gray-800 mt-auto">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center text-xs text-gray-400 gap-4">
+            <p class="copyable-text">&copy; 2026 SLAO (Wear Your Style). All Rights Reserved.</p>
+            <div class="flex gap-6">
+                <a href="index.html" class="hover:text-slao-gold transition">Home</a>
+                <a href="track-order.html" class="hover:text-slao-gold transition">Track Your Order</a>
+                <a href="tel:+923329975035" class="hover:text-slao-gold transition">Support: +92 3329975035</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        function renderStatusSteps(status) {
+            const steps = {
+                'Order Confirmed': 'step-confirmed',
+                'Packing Pending': 'step-packing',
+                'Dispatch Pending': 'step-dispatch',
+                'Delivery Complete': 'step-delivered',
+                'Return Order': 'step-return'
+            };
+
+            Object.values(steps).forEach(id => {
+                const el = document.getElementById(id);
+                el.className = 'p-3 rounded-2xl border bg-gray-50 text-gray-400 space-y-1';
+            });
+
+            const badge = document.getElementById('res-current-badge');
+            badge.innerText = status;
+
+            if (status === 'Return Order') {
+                document.getElementById('step-return').className = 'p-3 rounded-2xl border-2 border-rose-600 bg-rose-50 text-rose-700 space-y-1';
+                badge.className = 'inline-block px-4 py-1.5 rounded-full text-xs font-extrabold uppercase bg-rose-100 text-rose-800';
+                return;
+            }
+
+            const orderFlow = ['Order Confirmed', 'Packing Pending', 'Dispatch Pending', 'Delivery Complete'];
+            const idx = orderFlow.indexOf(status);
+            for (let i = 0; i <= (idx === -1 ? 1 : idx); i++) {
+                const el = document.getElementById(steps[orderFlow[i]]);
+                el.className = 'p-3 rounded-2xl border-2 border-emerald-600 bg-emerald-50 text-emerald-800 space-y-1';
+            }
+
+            badge.className = status === 'Delivery Complete'
+                ? 'inline-block px-4 py-1.5 rounded-full text-xs font-extrabold uppercase bg-emerald-100 text-emerald-800'
+                : 'inline-block px-4 py-1.5 rounded-full text-xs font-extrabold uppercase bg-amber-100 text-amber-800';
+        }
+
+        function searchOrder(prefillId) {
+            const rawInput = prefillId !== undefined ? prefillId : document.getElementById('track-order-input').value;
+            const query = rawInput.trim().toUpperCase();
+            const errBox = document.getElementById('track-not-found');
+            const errMsg = document.getElementById('track-error-msg');
+            const resBox = document.getElementById('track-result-box');
+
+            if (!query) {
+                resBox.classList.add('hidden');
+                errMsg.innerText = 'Please enter a valid tracking number to check your order status.';
+                errBox.classList.remove('hidden');
+                return;
+            }
+
+            document.getElementById('track-order-input').value = query;
+            const savedOrders = JSON.parse(localStorage.getItem('slao_orders') || '[]');
+            const found = savedOrders.find(o => (o.orderId || o.voucherId || '').toUpperCase() === query);
+
+            if (!found) {
+                resBox.classList.add('hidden');
+                errMsg.innerText = `No order found for tracking number "${query}". Please verify your Order ID and try again.`;
+                errBox.classList.remove('hidden');
+                return;
+            }
+
+            errBox.classList.add('hidden');
+            resBox.classList.remove('hidden');
+
+            document.getElementById('res-order-id').innerText = found.orderId || found.voucherId;
+            document.getElementById('res-order-date').innerText = found.date ? `Order Date: ${found.date}` : '';
+            document.getElementById('res-name').innerText = found.name;
+            document.getElementById('res-phone').innerText = found.phone;
+            document.getElementById('res-location').innerText = `${found.city}, ${found.province} (${found.postalCode || ''})`;
+            document.getElementById('res-address').innerText = found.address;
+            document.getElementById('res-payment').innerText = found.payType;
+            document.getElementById('res-total').innerText = `Rs. ${found.totalAmount.toLocaleString()}`;
+
+            document.getElementById('res-items').innerHTML = (found.items || []).map(it => `
+                <div class="py-1.5 flex justify-between">
+                    <span>${it.name} (${it.color}, ${it.size}) &times; ${it.quantity}</span>
+                    <span class="font-bold">Rs. ${(it.price * it.quantity).toLocaleString()}</span>
+                </div>
+            `).join('');
+
+            renderStatusSteps(found.status || 'Packing Pending');
+        }
+
+        const urlParams = new URLSearchParams(window.location.search);
+        const qrOrder = urlParams.get('order');
+        if (qrOrder) {
+            searchOrder(qrOrder);
+        }
+    </script>
+</body>
+</html>
