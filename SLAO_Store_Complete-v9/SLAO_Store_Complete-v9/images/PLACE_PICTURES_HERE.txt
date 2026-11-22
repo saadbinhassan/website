@@ -1,3 +1,0 @@
-Save your product images inside this 'images' folder.
-To assign a separate picture for each color, add the image path under 'colorImages' in store.js,
-for example: 'Black': 'images/suit-black.jpg', 'Maroon': 'images/suit-maroon.jpg'
